@@ -1,0 +1,112 @@
+import random
+class Vec3:
+
+    def __init__(self,a,b,c):
+        self.arr = [a,b,c]
+    def min(self,other):
+        print()
+
+
+
+
+
+
+
+def gcd(x,y):
+     a = max(x,y)
+     b = min(x,y)
+     # a>b
+     while b!=0:
+         x = a%b
+         a=b
+         b=x
+     return a
+
+#solves the equation ax=b (mod m)
+def solve(a,e,m):
+    assert a<m
+
+    v1= [m,0,1]
+    v2= [a,1,0]
+    #v2[0]<v1[0]
+    while v2[0] != 0:
+        q =v1[0]//v2[0]
+        x = v2.copy()
+        v2 = [v1[0]-q*v2[0],v1[1]-q*v2[1],v1[2]-q*v2[2]]
+        v1 = x
+    gcd = v1[0]
+    alpha= v1[1]
+    if (e%gcd) != 0:
+        return "er zijn geen oplossingen"
+    e2 = e//gcd
+    x0 = (e2 * alpha)%m
+
+
+
+    return "de oplossingsverzameling is { ",x0," + ",m//gcd, "*t |t e Z}"
+
+
+def bezout(a,m):
+    v1 = [m, 0, 1]
+    v2 = [a, 1, 0]
+    # v2[0]<v1[0]
+    while v2[0] != 0:
+        q = v1[0] // v2[0]
+        x = v2.copy()
+        v2 = [v1[0] - q * v2[0], v1[1] - q * v2[1], v1[2] - q * v2[2]]
+        v1 = x
+#    assert v1[0] == a*v1[1]+m*v1[2]
+    return v1
+
+def expmod2(a,b,m):
+    str = bin(b)
+    str = str[2:]
+    print(str)
+    list_squares=[]
+    tmp = a
+    result = 1
+    list_squares.insert(0,a)
+    for i in range(len(str)):
+        a=(a*a) % m
+        list_squares.insert(len(list_squares), a)
+    for i in range(len(str)):
+        if str[i]=='1':
+            result = (result*list_squares[i])%m
+    print(list_squares)
+    return result
+
+#berekent a^e mod n
+def expmod(a,e,n):
+    sol = a
+    str = bin(e)[2:]
+    for i in range(len(str)):
+        print(sol)
+        if str[i]==0:
+            (sol*a)%n
+            (sol**2)%n
+        else:
+            (sol**e)%n
+    return sol
+
+
+
+
+def main():
+    print(pow(2,3,5))
+    print(expmod(2,3,257))
+
+
+
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+
+
+
+
+
+
